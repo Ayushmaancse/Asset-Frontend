@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zebu Asset Tracker
 
-## Getting Started
+### 1. What is this?
+This is a minimalist CRUD (Create, Read, Update, Delete) dashboard built for Zebu Animation. It allows team members to track animation assets, toggle their approval status, and view a live system diagnostic report.
 
-First, run the development server:
+### 2. Steps to Setup
+To run this project on your machine, follow these simple steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1.  **Extract the files** into a folder.
+2.  **Open your terminal** and navigate to that folder.
+3.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+4.  **Run the application**:
+    ```bash
+    npm run dev
+    ```
+5.  **Open your browser** and go to `http://localhost:3000`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*Note: Make sure your Flask backend is running on port 5002.*
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. About the APIs
+The dashboard communicates with a Flask backend at `http://127.0.0.1:5002` using these professional REST endpoints:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+*   **GET `/api/assets`**: Fetches the list of all animation assets.
+*   **POST `/api/assets`**: Used to add a new asset to the tracker.
+*   **PUT `/api/assets/<id>`**: Used to toggle the status (Pending/Approved) of an asset.
+*   **DELETE `/api/assets/<id>`**: Used to permanently remove an asset record.
+*   **GET `/api/run-tests`**: Fetches the diagnostic "Test Case Data" (Arguments & Outcomes).
 
-## Learn More
+### 4. How the Architecture Looks
+I have kept the architecture "Surgical and Clean." 
+*   **Next.js (App Router)**: I use the latest standard of Next.js (`src/app`) to ensure the project is modern and high-performance.
+*   **Single-Page Logic**: All the core logic is kept in `page.tsx`. This makes the entire flow extremely easy to read in one scroll without jumping between different files.
+*   **Client-Side State**: I use React Hooks (`useState`, `useEffect`) to handle data updates instantly without refreshing the page.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 5. Design Patterns & Tradeoffs
+*   **Pattern: "Surgical Backend Alignment"**
+    *   Instead of using heavy libraries, I wrote raw `fetch` calls. This gives me 100% control over how I handle your specific backend data keys (`Arguments`, `Outcome`).
+*   **Tradeoff: Inline Styles vs. CSS Modules**
+    *   I chose **Inline Styles** inside `page.tsx` instead of using a separate CSS file. 
+    *   **Why?** It ensures a faster "Blank Look" setup and guarantees that the dashboard renders exactly as I intended, without any external CSS files getting lost or cached.
+*   **Tradeoff: Single File vs. Folders**
+    *   I chose to keep the code in one file rather than splitting it into multiple component folders.
+    *   **Why?** For a simple CRUD app, "Folder-wise" structure is often over-engineering. Keeping it in one clean file makes the logic much more transparent and easier to understand in one glance.
