@@ -1,7 +1,7 @@
-# Zebu Asset Tracker
+# Asset Tracker
 
 ### 1. What is this?
-This is a minimalist CRUD (Create, Read, Update, Delete) dashboard built for Zebu Animation. It allows team members to track animation assets, toggle their approval status, and view a live system diagnostic report.
+This is a minimalist CRUD (Create, Read, Update, Delete) dashboard built for Asset Tracking. It allows team members to track animation assets, toggle their approval status, and view a live system diagnostic report.
 
 ### 2. Steps to Setup
 To run this project on your machine, follow these simple steps:
